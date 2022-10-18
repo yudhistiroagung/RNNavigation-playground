@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { SafeAreaView, Text, StyleSheet, Button, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -6,6 +6,15 @@ const ScreenA = () => {
   const navigation = useNavigation();
 
   const spacing = useMemo(() => <View style={s.spacing} />, []);
+
+  const toBottomNav = useCallback(
+    () =>
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'bottom-nav', params: 'tab-2' }],
+      }),
+    [navigation],
+  );
 
   return (
     <SafeAreaView style={s.container}>
@@ -21,12 +30,7 @@ const ScreenA = () => {
         title="TO BOTTOM NAV"
       />
       {spacing}
-      <Button
-        onPress={() =>
-          navigation.navigate('bottom-nav', { routeName: 'tab-2' })
-        }
-        title="TO BOTTOM NAV TAB 2"
-      />
+      <Button onPress={toBottomNav} title="TO BOTTOM NAV TAB 2" />
     </SafeAreaView>
   );
 };
