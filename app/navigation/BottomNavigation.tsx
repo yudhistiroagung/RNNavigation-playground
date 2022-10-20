@@ -4,7 +4,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useRoute } from '@react-navigation/native';
 import AntDesignIcons from 'react-native-vector-icons/AntDesign';
 
-const Tab = createBottomTabNavigator();
+import { TabStackParamList } from './Navigation.config';
+import { routes } from './Navigation.utils';
+
+const Tab = createBottomTabNavigator<TabStackParamList>();
 
 const Fragment1 = () => {
   return (
@@ -38,7 +41,7 @@ const BottomNavigation = () => {
   const { params } = useRoute<any>();
 
   const initialRouteName = useMemo(
-    () => params?.routeName || 'tab-1',
+    () => params?.initialRoute || routes.tabs('HOME'),
     [params],
   );
 
@@ -48,7 +51,7 @@ const BottomNavigation = () => {
         screenOptions={screenOptions}
         initialRouteName={initialRouteName}>
         <Tab.Screen
-          name="tab-1"
+          name="HOME"
           options={{
             tabBarLabel: 'HOME',
             tabBarIcon: ({ color, size }) => {
@@ -57,8 +60,26 @@ const BottomNavigation = () => {
           }}
           component={Fragment1}
         />
-        <Tab.Screen name="tab-2" component={Fragment2} />
-        <Tab.Screen name="tab-3" component={Fragment3} />
+        <Tab.Screen
+          name="SHOP"
+          options={{
+            tabBarLabel: 'SHOP',
+            tabBarIcon: ({ color, size }) => {
+              return <AntDesignIcons color={color} size={size} name="skin" />;
+            },
+          }}
+          component={Fragment2}
+        />
+        <Tab.Screen
+          name="PROFILE"
+          options={{
+            tabBarLabel: 'PROFILE',
+            tabBarIcon: ({ color, size }) => {
+              return <AntDesignIcons color={color} size={size} name="user" />;
+            },
+          }}
+          component={Fragment3}
+        />
       </Tab.Navigator>
     </SafeAreaView>
   );

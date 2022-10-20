@@ -2,6 +2,8 @@ import React, { useCallback, useMemo } from 'react';
 import { SafeAreaView, Text, StyleSheet, Button, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+import { routes } from '../navigation/Navigation.utils';
+
 const ScreenA = () => {
   const navigation = useNavigation();
 
@@ -11,7 +13,12 @@ const ScreenA = () => {
     () =>
       navigation.reset({
         index: 0,
-        routes: [{ name: 'bottom-nav', params: 'tab-2' }],
+        routes: [
+          {
+            name: 'DASHBOARD',
+            params: { initialRoute: routes.tabs('SHOP') },
+          },
+        ],
       }),
     [navigation],
   );
@@ -21,16 +28,16 @@ const ScreenA = () => {
       <Text>Screen A</Text>
       {spacing}
       <Button
-        onPress={() => navigation.navigate('screen-b')}
+        onPress={() => navigation.navigate('SCREEN_B')}
         title="TO SCREEN B"
       />
       {spacing}
       <Button
-        onPress={() => navigation.navigate('bottom-nav')}
-        title="TO BOTTOM NAV"
+        onPress={() => navigation.navigate('DASHBOARD')}
+        title="TO DASHBOARD"
       />
       {spacing}
-      <Button onPress={toBottomNav} title="TO BOTTOM NAV TAB 2" />
+      <Button onPress={toBottomNav} title="RESET DASHBOARD TAB 2" />
     </SafeAreaView>
   );
 };

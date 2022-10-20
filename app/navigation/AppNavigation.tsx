@@ -3,9 +3,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { ScreenA, ScreenB, ScreenC } from '../screens';
+import { RootStackParamList } from './Navigation.config';
 import BottomNav from './BottomNavigation';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const AppNavigation = () => (
   <NavigationContainer>
@@ -15,14 +16,15 @@ const AppNavigation = () => (
         headerBlurEffect: 'dark',
         animation: 'slide_from_right',
       }}>
-      <Stack.Screen name="screen-a" component={ScreenA} />
-      <Stack.Screen name="screen-b" component={ScreenB} />
-      <Stack.Screen name="screen-c" component={ScreenC} />
+      <Stack.Screen name="SCREEN_A" component={ScreenA} />
+      <Stack.Screen name="SCREEN_B" component={ScreenB} />
+      <Stack.Screen name="SCREEN_C" component={ScreenC} />
       <Stack.Screen
-        name="bottom-nav"
+        name="DASHBOARD"
         component={BottomNav}
         options={{
           headerShown: false,
+          animation: 'fade',
         }}
       />
     </Stack.Navigator>
