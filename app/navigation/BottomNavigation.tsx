@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useRoute } from '@react-navigation/native';
 import AntDesignIcons from 'react-native-vector-icons/AntDesign';
 
-import { TabStackParamList } from './Navigation.config';
+import { TabStackParamList, RootStackScreenProps } from './Navigation.config';
 import { routes } from './Navigation.utils';
 
 const Tab = createBottomTabNavigator<TabStackParamList>();
@@ -38,7 +38,7 @@ const screenOptions = {
 };
 
 const BottomNavigation = () => {
-  const { params } = useRoute<any>();
+  const { params } = useRoute<RootStackScreenProps<'DASHBOARD'>['route']>();
 
   const initialRouteName = useMemo(
     () => params?.initialRoute || routes.tabs('HOME'),
