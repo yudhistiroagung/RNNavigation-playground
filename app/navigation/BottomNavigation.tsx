@@ -1,15 +1,18 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, FC } from 'react';
 import { View, SafeAreaView, StyleSheet, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useRoute } from '@react-navigation/native';
 import AntDesignIcons from 'react-native-vector-icons/AntDesign';
 
-import { TabStackParamList, RootStackScreenProps } from './Navigation.config';
-import { routes } from './Navigation.utils';
+import {
+  DashboardStackParamList,
+  RootStackScreenProps,
+  TabStackScreenProps,
+} from './Navigation.config';
 
-const Tab = createBottomTabNavigator<TabStackParamList>();
+const Tab = createBottomTabNavigator<DashboardStackParamList>();
 
-const Fragment1 = () => {
+const Fragment1: FC<TabStackScreenProps<'HOME'>> = () => {
   return (
     <View style={[s.container, s.center]}>
       <Text>Tab 1</Text>
@@ -17,7 +20,7 @@ const Fragment1 = () => {
   );
 };
 
-const Fragment2 = () => {
+const Fragment2: FC<TabStackScreenProps<'SHOP'>> = () => {
   return (
     <View style={[s.container, s.center]}>
       <Text>Tab 2</Text>
@@ -25,7 +28,7 @@ const Fragment2 = () => {
   );
 };
 
-const Fragment3 = () => {
+const Fragment3: FC<TabStackScreenProps<'PROFILE'>> = () => {
   return (
     <View style={[s.container, s.center]}>
       <Text>Tab 3</Text>
@@ -41,7 +44,7 @@ const BottomNavigation = () => {
   const { params } = useRoute<RootStackScreenProps<'DASHBOARD'>['route']>();
 
   const initialRouteName = useMemo(
-    () => params?.initialRoute || routes.tabs('HOME'),
+    () => params?.initialRoute || 'HOME',
     [params],
   );
 

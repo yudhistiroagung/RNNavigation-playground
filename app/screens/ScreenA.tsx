@@ -2,10 +2,10 @@ import React, { useCallback, useMemo } from 'react';
 import { SafeAreaView, Text, StyleSheet, Button, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { routes } from '../navigation/Navigation.utils';
+import { RootStackNavigationProps } from '../navigation/Navigation.config';
 
 const ScreenA = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackNavigationProps<'SCREEN_A'>>();
 
   const spacing = useMemo(() => <View style={s.spacing} />, []);
 
@@ -16,7 +16,7 @@ const ScreenA = () => {
         routes: [
           {
             name: 'DASHBOARD',
-            params: { initialRoute: routes.tabs('SHOP') },
+            params: { initialRoute: 'SHOP' },
           },
         ],
       }),
