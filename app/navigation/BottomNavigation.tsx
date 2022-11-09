@@ -13,16 +13,9 @@ import {
 // remember that lazy import should be wrapped by <Suspense /> component
 // i this case, suspense is in app navigation (root navigator)
 const FragmentOne = lazy(() => import('../screens/FragmentOne'));
+const FragmentTwo = lazy(() => import('../screens/FragmentTwo'));
 
 const Tab = createBottomTabNavigator<DashboardStackParamList>();
-
-const Fragment2: FC<TabStackScreenProps<'SHOP'>> = () => {
-  return (
-    <View style={[s.container, s.center]}>
-      <Text>Tab 2</Text>
-    </View>
-  );
-};
 
 const Fragment3: FC<TabStackScreenProps<'PROFILE'>> = () => {
   return (
@@ -65,7 +58,7 @@ const BottomNavigation = () => {
             return <AntDesignIcons color={color} size={size} name="skin" />;
           },
         }}
-        component={Fragment2}
+        component={FragmentTwo}
       />
       <Tab.Screen
         name="PROFILE"
