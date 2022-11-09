@@ -1,4 +1,4 @@
-import React, { useMemo, FC } from 'react';
+import React, { useMemo, FC, lazy } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useRoute } from '@react-navigation/native';
@@ -9,7 +9,10 @@ import {
   RootStackScreenProps,
   TabStackScreenProps,
 } from './Navigation.config';
-import FragmentOne from '../screens/FragmentOne';
+
+// remember that lazy import should be wrapped by <Suspense /> component
+// i this case, suspense is in app navigation (root navigator)
+const FragmentOne = lazy(() => import('../screens/FragmentOne'));
 
 const Tab = createBottomTabNavigator<DashboardStackParamList>();
 
